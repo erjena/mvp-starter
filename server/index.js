@@ -9,7 +9,11 @@ app.use(express.static(`${__dirname}/../client/dist`));
 app.use(bodyParser.json());
 
 app.get('/newGame', (req, res) => {
-  res.send({grid: initBoard[0]});
+  if (req.query.userName === 'y') {
+    res.send({grid: initBoard[1]})
+  } else {
+    res.send({grid: initBoard[0]});
+  }
 });
 
 app.post('/save', (req, res) => {

@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Board from './Board.jsx';
-import styles from '../dist/styles.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -82,6 +81,16 @@ class App extends React.Component {
           return;
         }
       }
+      const gridX = Math.floor(row / 3);
+      const gridY = Math.floor(col / 3);
+      for (let i = gridX * 3; i < (gridX + 1) * 3; i++) {
+        for (let j = gridY * 3; j < (gridY + 1) * 3; j++ ) {
+          if (i !== row && j !== col && value === this.state.grid[i][j]) {
+            alert('Invalud grid');
+            return;
+          }
+        }
+      }
     } else {
       value = 0;
     }
@@ -90,6 +99,19 @@ class App extends React.Component {
     this.setState({
       grid: this.state.grid
     });
+
+    let finish = true;
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (this.state.grid[i][j] === 0) {
+          finish = false;
+        }
+      }
+    }
+
+    if (finish === true) {
+      alert('You won!!!');
+    }
   }
 
   handleSave(e) {

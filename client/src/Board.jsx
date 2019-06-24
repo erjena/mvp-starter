@@ -24,13 +24,13 @@ export default class Board extends React.Component {
         return (
           <td key={id} style={{backgroundColor: color, borderLeft: borderLeftColor, borderTop: borderTopColor}}>
             <input
+              autoComplete="off"
               id={id}
               type="text"
               maxLength="1"
               value={value}
               onChange={this.handleChange}
               className="cell"
-              autoComplete="off"
               style={{backgroundColor: color}}
             />
         </td>)
