@@ -4,14 +4,7 @@ import '../dist/styles.css';
 export default class Board extends React.Component {
   constructor(props) {
     super(props);
-    this.state = ({
-      cellValue: '',
-      grid: [
-        [0,1,1],
-        [0,1,1],
-        [0,1,1]
-      ]
-    });
+
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -20,7 +13,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const rows = this.state.grid.map((r, i) => {
+    const rows = this.props.grid.map((r, i) => {
       const cells = r.map((c, j) => {
         const id = i.toString() + j.toString();
         return (
