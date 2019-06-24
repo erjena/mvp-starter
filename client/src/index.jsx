@@ -10,11 +10,13 @@ class App extends React.Component {
     this.state = {
       userName: '',
       started: false,
+      initGrid: [],
       grid: []
     }
     this.handleUserName = this.handleUserName.bind(this);
     this.handleNewGame = this.handleNewGame.bind(this);
     this.handleLoadGame = this.handleLoadGame.bind(this);
+    this.handleGridChange = this.handleGridChange.bind(this);
   }
 
   handleUserName(e) {
@@ -33,7 +35,8 @@ class App extends React.Component {
     axios.get(`/newGame?userName=${this.state.userName}`)
     .then((response) => {
         this.setState({
-          grid: response.data.grid,
+          initGrid: response.data.grid,
+          grid: JSON.parse(JSON.stringify(response.data.grid)),
           started: true
         });
       })
@@ -44,6 +47,36 @@ class App extends React.Component {
 
   handleLoadGame(e) {
     console.log('load')
+  }
+
+  handleGridChange(row, col, value) {
+    if (this.state.initGrid[row][col] !== 0) {
+      alert('Can not change initial values');
+      return;
+    }
+
+    if (value !== '') {
+      value = Number(value);
+      for (let j = 0; j < 9; j++) {
+        if (j != col && value === this.state.grid[row][j]) {
+          alert('Invalid row');
+          return;
+        }
+      }
+      for (let i = 0; i < 9; i++) {
+        if (i != row && value === this.state.grid[i][col]) {
+          alert('Invalid column');
+          return;
+        }
+      }
+    } else {
+      value = 0;
+    }
+
+    this.state.grid[row][col] = value;
+    this.setState({
+      grid: this.state.grid
+    });
   }
 
   render() {        
@@ -58,7 +91,7 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <Board grid={this.state.grid}/>
+          <Board grid={this.state.grid} onValueChange={this.handleGridChange}/>
         </div>
       )
     }
