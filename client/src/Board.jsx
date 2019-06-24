@@ -12,12 +12,21 @@ export default class Board extends React.Component {
         [0,1,1]
       ]
     });
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    console.log(e.target)
   }
 
   render() {
     const rows = this.state.grid.map((r, i) => {
       const cells = r.map((c, j) => {
-        return (<td key={i.toString() + j.toString()}><input type="text" maxLength="1" /></td>)
+        const id = i.toString() + j.toString();
+        return (
+        <td key={id}>
+          <input id={id} type="text" maxLength="1" value={c} onChange={this.handleChange} />
+        </td>)
       });
       return (
         <tr key={i.toString()}>
