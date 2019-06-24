@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Board from './Board.jsx';
-import NumChoice from './NumChoice.jsx';
 import styles from '../dist/styles.css';
 
 class App extends React.Component {
@@ -33,8 +32,8 @@ class App extends React.Component {
     }
     axios.get(`/newGame?userName=${this.state.userName}`)
     .then((response) => {
-      console.log(response.data)
         this.setState({
+          grid: response.data.grid,
           started: true
         });
       })
@@ -60,7 +59,6 @@ class App extends React.Component {
       return (
         <div>
           <Board grid={this.state.grid}/>
-          <NumChoice />
         </div>
       )
     }

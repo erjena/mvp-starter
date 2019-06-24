@@ -16,9 +16,10 @@ export default class Board extends React.Component {
     const rows = this.props.grid.map((r, i) => {
       const cells = r.map((c, j) => {
         const id = i.toString() + j.toString();
+        const value = c === 0 ? '' : c;
         return (
         <td key={id}>
-          <input id={id} type="text" maxLength="1" value={c} onChange={this.handleChange} />
+          <input id={id} type="text" maxLength="1" value={value} onChange={this.handleChange} />
         </td>)
       });
       return (
