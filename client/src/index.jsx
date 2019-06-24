@@ -17,6 +17,7 @@ class App extends React.Component {
     this.handleNewGame = this.handleNewGame.bind(this);
     this.handleLoadGame = this.handleLoadGame.bind(this);
     this.handleGridChange = this.handleGridChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   handleUserName(e) {
@@ -33,7 +34,7 @@ class App extends React.Component {
       return;
     }
     axios.get(`/newGame?userName=${this.state.userName}`)
-    .then((response) => {
+      .then((response) => {
         this.setState({
           initGrid: response.data.grid,
           grid: JSON.parse(JSON.stringify(response.data.grid)),
@@ -42,11 +43,23 @@ class App extends React.Component {
       })
       .catch((error) => {
         console.log(error);
+        alert(error);
       })
   }
 
   handleLoadGame(e) {
-    console.log('load')
+    axios.get(`/loadGame?userName=${this.state.userName}`)
+      .then((response) => {
+        this.setState({
+          userName: response.data.userName,
+          initGrid: response.data.initGrid,
+          grid: response.data.grid,
+          started: true
+        })
+      })
+      .catch((error) => {
+        alert(error);
+      })
   }
 
   handleGridChange(row, col, value) {
@@ -79,6 +92,22 @@ class App extends React.Component {
     });
   }
 
+  handleSave(e) {
+    e.preventDefault();
+    axios.post('/save', {
+      userName: this.state.userName,
+      initGrid: this.state.initGrid,
+      grid: this.state.grid
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      })
+  }
+
   render() {        
     if (this.state.started === false) {
       return (
@@ -92,6 +121,7 @@ class App extends React.Component {
       return (
         <div>
           <Board grid={this.state.grid} onValueChange={this.handleGridChange}/>
+          <button onClick={this.handleSave}>Save</button>
         </div>
       )
     }

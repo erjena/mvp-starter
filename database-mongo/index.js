@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', function() {
   console.log('mongoose connection error');
@@ -11,21 +11,35 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+const playerState = mongoose.Schema({
+  userName: String,
+  initGrid: Array,
+  grid: Array
 });
 
-var Item = mongoose.model('Item', itemSchema);
+const PlayerState = mongoose.model('PlayerState', playerState);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+const savePlayerState = (state, callback) => {
+  PlayerState.findOneAndUpdate({userName: state.userName}, state, {upsert: true}, (err, result) => {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, result);
+    }
+  })
+}
+
+const findPlayerState = (userName, callback) => {
+  PlayerState.findOne({userName: userName}, (err, result) => {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
     }
   });
 };
 
-module.exports.selectAll = selectAll;
+module.exports = {
+  savePlayerState,
+  findPlayerState
+}
