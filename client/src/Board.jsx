@@ -18,9 +18,21 @@ export default class Board extends React.Component {
       const cells = r.map((c, j) => {
         const id = i.toString() + j.toString();
         const value = c === 0 ? '' : c;
+        const color = this.props.initGrid[i][j] !== 0 ? 'lightgrey' : '';
+        const borderLeftColor = (j > 0 && j % 3 === 0) ? '2px solid red' : '';
+        const borderTopColor = (i > 0 && i % 3 === 0) ? '2px solid red' : '';
         return (
-        <td key={id}>
-          <input id={id} type="text" maxLength="1" value={value} onChange={this.handleChange} className="cell" autoComplete="off"/>
+          <td key={id} style={{backgroundColor: color, borderLeft: borderLeftColor, borderTop: borderTopColor}}>
+            <input
+              id={id}
+              type="text"
+              maxLength="1"
+              value={value}
+              onChange={this.handleChange}
+              className="cell"
+              autoComplete="off"
+              style={{backgroundColor: color}}
+            />
         </td>)
       });
       return (
@@ -29,7 +41,7 @@ export default class Board extends React.Component {
         </tr>
       )
     });
-    return(
+    return (
       <table>
         <tbody>
           {rows}

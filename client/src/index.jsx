@@ -120,7 +120,7 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <Board grid={this.state.grid} onValueChange={this.handleGridChange}/>
+          <Board initGrid={this.state.initGrid} grid={this.state.grid} onValueChange={this.handleGridChange}/>
           <button onClick={this.handleSave}>Save</button>
         </div>
       )
