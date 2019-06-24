@@ -1,15 +1,20 @@
 td {
   border: 1px solid black;
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
 }
 
+.cell {
+  border: 0px;
+  text-align: center;
+  font-size: 22px;
+  width: 45px;
+}
 .currNum {
   margin-top: 25px;
   border: 1px solid grey;
   width: 60px;
   height: 45px;
-  font-size: 22px;
 }
 
 button:active {

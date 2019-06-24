@@ -9,7 +9,22 @@ export default class Board extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.target)
+    const row = Number(e.target.id[0]);
+    const col = Number(e.target.id[1]);
+    const value = Number(e.target.value);
+    for (let j = 0; j < 9; j++) {
+      if (j != col && value === this.props.grid[row][j]) {
+        alert('Invalid row');
+        return;
+      }
+    }
+    for (let i = 0; i < 9; i++) {
+      if (i != row && value === this.props.grid[i][col]) {
+        alert('Invalid column');
+        return;
+      }
+    }
+    this.props.grid[row][col] = value;
   }
 
   render() {
@@ -19,7 +34,7 @@ export default class Board extends React.Component {
         const value = c === 0 ? '' : c;
         return (
         <td key={id}>
-          <input id={id} type="text" maxLength="1" value={value} onChange={this.handleChange} />
+          <input id={id} type="text" maxLength="1" value={value} onChange={this.handleChange} className="cell"/>
         </td>)
       });
       return (
