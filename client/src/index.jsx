@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       userName: '',
+      started: false,
       grid: []
     }
     this.handleUserName = this.handleUserName.bind(this);
@@ -31,8 +32,11 @@ class App extends React.Component {
       return;
     }
     axios.get(`/newGame?userName=${this.state.userName}`)
-      .then((response) => {
-        console.log('in axios')
+    .then((response) => {
+      console.log(response.data)
+        this.setState({
+          started: true
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +48,7 @@ class App extends React.Component {
   }
 
   render() {        
-    if (this.state.userName === '') {
+    if (this.state.started === false) {
       return (
         <div>
           <input type="text" value={this.state.userName} onChange={this.handleUserName}/>
