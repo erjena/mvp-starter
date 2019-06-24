@@ -133,17 +133,19 @@ class App extends React.Component {
   render() {        
     if (this.state.started === false) {
       return (
-        <div>
-          <input type="text" value={this.state.userName} onChange={this.handleUserName}/>
-          <button onClick={this.handleNewGame}>Start New Game</button>
-          <button onClick={this.handleLoadGame}>Load Game</button>
+        <div className="initPage">
+          <input className= "username" type="text" value={this.state.userName} onChange={this.handleUserName}/>
+          <div className="startLoadButtons">
+            <button className="startButton" onClick={this.handleNewGame}>Start New Game</button>
+            <button className="loadButton" onClick={this.handleLoadGame}>Load Game</button>
+          </div>
         </div>
       )
     } else {
       return (
         <div>
           <Board initGrid={this.state.initGrid} grid={this.state.grid} onValueChange={this.handleGridChange}/>
-          <button onClick={this.handleSave}>Save</button>
+          <button className="saveButton" onClick={this.handleSave}>Save</button>
         </div>
       )
     }

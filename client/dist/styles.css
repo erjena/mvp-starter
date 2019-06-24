@@ -1,5 +1,12 @@
+table {
+  border-collapse: collapse;
+  margin-top: 10%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 td {
-  border: 1px solid black;
+  border: 1px solid slategrey;
   width: 45px;
   height: 45px;
 }
@@ -8,15 +15,87 @@ td {
   border: 0px;
   text-align: center;
   font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   width: 45px;
 }
-.currNum {
-  margin-top: 25px;
-  border: 1px solid grey;
-  width: 60px;
-  height: 45px;
+
+*:focus {
+  outline: none;
 }
 
-button:active {
-  background-color: grey;
+.cell:hover {
+  outline: none;
+  border: none;
+}
+
+.saveButton {
+  margin-left: 47%;
+  border-radius: 8px;
+  margin-top: 45px;
+  width: 100px;
+  height: 45px;
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: rgb(233, 233, 233);
+}
+
+.saveButton:hover {
+  background-color: rgb(197, 198, 199);
+  outline: none;
+  border: none;
+}
+
+.initPage {
+  display: block;
+  margin-left: 40%;
+  margin-right: auto;
+  width: 50%;
+}
+
+.username {
+  margin-top: 35%;
+  border-radius: 8px;
+  border: 2px solid darkgrey;
+  width: 350px;
+  height: 45px;
+  font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.username:hover {
+  outline: none !important;
+}
+
+.startButton {
+  border-radius: 8px;
+  display: block;
+  margin-top: 15px;
+  height: auto;
+  width: auto;
+  font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: rgb(233, 233, 233);
+}
+
+.startButton:hover {
+  background-color: rgb(197, 198, 199);
+  outline: none;
+  border: none;
+}
+
+.loadButton {
+  border-radius: 8px;
+  display: block;
+  margin-top: 15px;
+  height: auto;
+  width: auto;
+  font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: rgb(233, 233, 233);
+}
+
+.loadButton:hover {
+  background-color: rgb(197, 198, 199);
+  outline: none;
+  border: none;
 }
