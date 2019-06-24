@@ -1,0 +1,17 @@
+td {
+  border: 1px solid black;
+  width: 60px;
+  height: 60px;
+}
+
+.currNum {
+  margin-top: 25px;
+  border: 1px solid grey;
+  width: 60px;
+  height: 45px;
+  font-size: 22px;
+}
+
+button:active {
+  background-color: grey;
+}
